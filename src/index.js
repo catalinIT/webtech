@@ -1,9 +1,14 @@
-var http = require("http");
+const express = require("express");
 
-//create a server object:
-http
-  .createServer(function(req, res) {
-    res.write("Hello World!"); //write a response to the client
-    res.end(); //end the response
-  })
-  .listen(8080); //the server object listens on port 8080
+//how to make a simple server through a factory func
+//npm manipulates package.json
+const app = express();
+
+//funtion that enables us to apply a middleware
+app.use(express.static(__dirname + "/public"));
+
+app.get("/", (req, res) => {
+  res.send("hello world");
+});
+
+app.listen(8080);
